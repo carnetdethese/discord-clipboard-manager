@@ -13,3 +13,5 @@ First clone the repo and start a virtual environnement. Add the dependencies wit
 You will need to create a private server on Discord, add as many bots as you have devices.
 
 Ah, one thing. If you intend to use this on your Android device, make sure to download Termux (F-Droid only!) and Tasker.
+
+I use a simple bash script with Raycast to send the clipboard easily from Mac, and Tasker with AutoShare. I'm sure there are better ways to accomplish this, but this was the fastest and easiest way to do this for me.
