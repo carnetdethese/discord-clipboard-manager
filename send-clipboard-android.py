@@ -1,11 +1,11 @@
 from cryptography.fernet import Fernet
 import sys
 import requests
-import secret_vars
+import utilities
 
-token = secret_vars.encrypt(bytes(sys.argv[1]), secret_vars.key)
+token = utilities.encrypt(bytes(sys.argv[1]), utilities.key)
 
-url = f'https://discord.com/api/webhooks/{secret_vars.webhook_id}/{secret_vars.webhook_token}' # Url of Discord channel.
+url = f'https://discord.com/api/webhooks/{utilities.webhook_id}/{utilities.webhook_token}' # Url of Discord channel.
 data = {'content': token.decode()}
 headers = {"Content-Type": "application/json"} 
 response = requests.post(url, headers=headers, json=data)
