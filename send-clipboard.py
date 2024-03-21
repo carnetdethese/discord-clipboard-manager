@@ -6,14 +6,18 @@ sys.path.append(script_dir)
 import pyperclip
 import requests
 import utilities
-import 
 
 # Encrypting the clipboard before sending it to Discord.
-token = utilities.encrypt(bytes(pyperclip.paste(), "UTF-8"), utilities.key)
+
+if utilities.device == "android":
+    token = utilities.encrypt(bytes(sys.argv[1]), utilities.key)
+else:
+    token = utilities.encrypt(bytes(pyperclip.paste(), "UTF-8"), utilities.key)
 
 url = f'https://discord.com/api/webhooks/{utilities.webhook_id}/{utilities.webhook_token}'
 data = {'content': token.decode()}
 headers = {"Content-Type": "application/json"}
 response = requests.post(url, headers=headers, json=data)
+
 
 
