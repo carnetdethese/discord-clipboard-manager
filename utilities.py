@@ -10,9 +10,11 @@ load_dotenv()
 webhook_id = os.getenv("WEBHOOK_ID")
 webhook_token = os.getenv("WEBHOOK_TOKEN")
 key = os.getenv("ENCRYPTION_KEY")
-discord_user = os.getenv("DISCORD_USER")
+discord_user = int(os.getenv("DISCORD_USER"))
 discord_token = os.getenv("DISCORD_TOKEN")
-tasker_port = os.getenv("TASKER_PORT")
+tasker_port = int(os.getenv("TASKER_PORT"))
+
+no_permission = "You don't have permission to use this command."
 
 with open("config.yaml") as f:
     cfg = yaml.load(f, Loader=yaml.FullLoader)

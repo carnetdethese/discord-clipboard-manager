@@ -1,13 +1,25 @@
 import discord
+from discord.ext import commands
 import utilities
 import pyperclip
-from discord.ext import commands
 
 intents = discord.Intents.default()
 intents.message_content = True
 
-
 bot = commands.Bot(command_prefix='!', intents=intents)
+
+print(utilities.discord_user)
+
+@bot.command()
+async def delete_all(ctx):
+    if ctx.author.id == int(utilities.discord_user):
+        async for message in ctx.channel.history(limit=None):
+            await message.delete()
+        await ctx.send("All messages have been deleted.")
+    else:
+        await ctx.send(utilities.no_permission)
+
+    print(ctx.author.id)
 
 @bot.event
 async def on_ready():
@@ -15,8 +27,7 @@ async def on_ready():
 
 @bot.event
 async def on_message(message):
-
-    if message.author == bot.user:
+    if message.author == bot.user and message.content != utilities.no_permission:
         print("Clipboard received from MacOs.") if utilities.device == "android" else print("Clipboard received from Android.")
 
         token = bytes(message.content, "UTF-8")
@@ -26,16 +37,8 @@ async def on_message(message):
         return
     
     print("Message received, but not from the right user.")
-
-@bot.command()
-async def delete_all(ctx):
-    if ctx.author.id == utilities.discord_user:
-        # Fetch messages from the channel and delete them
-        async for message in ctx.channel.history(limit=None):
-            await message.delete()
-        await ctx.send("All messages have been deleted.")
-    else:
-        await ctx.send("You don't have permission to use this command.")
+    
+    await bot.process_commands(message)
 
 bot.run(utilities.discord_token)
 
