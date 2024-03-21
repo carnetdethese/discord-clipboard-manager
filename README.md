@@ -26,7 +26,7 @@ This Discord Clipboard Manager is a Python-based tool that securely manages your
 1. Clone this repository to your local machine.
 
    ```bash
-   git clone https://github.com/yourusername/discord-clipboard-manager.git
+   git clone https://github.com/carnetdethese/discord-clipboard-manager.git
    ```
 
 2. Install the required Python packages.
